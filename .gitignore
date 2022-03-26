@@ -43,5 +43,5 @@ yarn-error.log*
 .vscode
 
 # sequelize db config
-/sequelize/config.js
-/sequelize/config.ts
+sequelize/config.js
+sequelize/config.ts
