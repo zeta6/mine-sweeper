@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next export",
     "start": "next start",
     "lint": "next lint"
   },
@@ -15,22 +15,26 @@
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.1",
+    "aws-amplify": "^4.3.19",
     "axios": "^0.26.1",
     "crypto-js": "^4.1.1",
-    "mysql2": "^2.3.3",
     "next": "12.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "sequelize": "^6.17.0"
+    "recoil": "^0.6.1"
   },
   "devDependencies": {
     "@types/node": "17.0.21",
     "@types/react": "17.0.40",
+    "@typescript-eslint/eslint-plugin": "^5.18.0",
     "eslint": "8.11.0",
     "eslint-config-next": "12.1.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "next-secure-headers": "^2.2.0",
     "prettier": "^2.6.1",
-    "typescript": "4.6.2"
+    "ts-node": "10.7.0",
+    "typescript": "4.6.2",
+    "webpack-subresource-integrity": "^5.1.0"
   }
 }
