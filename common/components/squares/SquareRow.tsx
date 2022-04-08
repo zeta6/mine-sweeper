@@ -8,8 +8,8 @@ interface SquareRowProps {
 const SquareRow = (props: SquareRowProps) => {
   return (
     <div style={{ width: props.squarePerRow * 20 }}>
-      {[...Array(props.squarePerRow).keys()].map(() => (
-        <Square></Square>
+      {[...Array(props.squarePerRow).keys()].map((num) => (
+        <Square key={num}></Square>
       ))}
     </div>
   )

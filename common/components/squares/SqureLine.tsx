@@ -9,8 +9,8 @@ interface SquareLineProps {
 const SqureLine = (props: SquareLineProps) => {
   return (
     <Fragment>
-      {[...Array(props.lineNumber)].map(() => (
-        <SquareRow squarePerRow={props.squarePerRow}></SquareRow>
+      {[...Array(props.lineNumber)].map((num, index) => (
+        <SquareRow key={index} squarePerRow={props.squarePerRow}></SquareRow>
       ))}
     </Fragment>
   )

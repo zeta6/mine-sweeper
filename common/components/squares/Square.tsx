@@ -1,3 +1,12 @@
+import axios from 'axios'
+import { leftClickCountState } from 'common/atoms/clickCount'
+import { createGame } from 'common/utils/game/createGame'
+
+const doAttempt = (leftClickCountState: number) => {
+  if (leftClickCountState === 0) {
+    createGame()
+  }
+}
 const Square = () => (
   <div
     style={{
@@ -7,6 +16,7 @@ const Square = () => (
       border: 'black solid 2px',
       display: 'table-cell',
     }}
+    onClick={() => doAttempt(0)}
   ></div>
 )
 
