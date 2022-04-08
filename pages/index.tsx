@@ -1,12 +1,32 @@
-import * as React from 'react';
-import type { NextPage } from 'next';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Link from 'common/components/link/Link';
-import Copyright from '../common/components/copy-right/Copyright';
+import * as React from 'react'
+import { useRouter } from 'next/router'
+import type { NextPage } from 'next'
+import Container from '@mui/material/Container'
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
+import Link from 'common/components/link/Link'
+import Copyright from '../common/components/copy-right/Copyright'
+import { Button } from '@mui/material'
+import axios from 'axios'
+
+const minesTotal = 20
+const squreRow = 10
+const squreLine = 10
+
+const apiTest = async () => {
+  const result = await axios.post('/api/test', {
+    mineTotal: minesTotal,
+    squareTotal: squreRow * squreLine,
+  })
+  console.log('result', result)
+}
 
 const Home: NextPage = () => {
+  // const router = useRouter()
+  // React.useEffect(() => {
+  //   router.push('/tempGame')
+  // }, [router])
+
   return (
     <Container maxWidth="lg">
       <Box
@@ -19,12 +39,13 @@ const Home: NextPage = () => {
         }}
       >
         <Typography variant="h4" component="h1" gutterBottom>
-          mine
+          mine-sweeper
         </Typography>
         <Copyright />
       </Box>
+      <Button onClick={() => apiTest()}> test </Button>
     </Container>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
