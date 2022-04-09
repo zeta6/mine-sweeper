@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { SubresourceIntegrityPlugin } = require('webpack-subresource-integrity')
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { createSecureHeaders } = require('next-secure-headers')
 
 const nextConfig = {
