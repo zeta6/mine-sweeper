@@ -1,0 +1,27 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-minesw-dev-13030-authRole",
+      "UnauthRoleArn": "arn:aws:iam::187813938364:role/amplify-minesw-dev-13030-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::187813938364:role/amplify-minesw-dev-13030-authRole",
+      "Region": "ap-northeast-2",
+      "DeploymentBucketName": "amplify-minesw-dev-13030-deployment",
+      "UnauthRoleName": "amplify-minesw-dev-13030-unauthRole",
+      "StackName": "amplify-minesw-dev-13030",
+      "StackId": "arn:aws:cloudformation:ap-northeast-2:187813938364:stack/amplify-minesw-dev-13030/371729c0-b759-11ec-9080-02a29b1fdd64",
+      "AmplifyAppId": "d1rmk9tq123ol6",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-minesw-dev-13030-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d1rmk9tq123ol6",
+          "type": "cicd"
+        }
+      },
+      "auth": {
+        "undefined": {}
+      }
+    }
+  }
+}

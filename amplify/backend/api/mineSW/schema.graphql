@@ -1,0 +1,5 @@
+type Game @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  mines: String
+  mine_total: Int
+}

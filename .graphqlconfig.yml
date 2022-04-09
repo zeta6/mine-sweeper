@@ -1,0 +1,15 @@
+projects:
+  mineSW-dev:
+    schemaPath: src/graphql/schema.json
+    includes:
+      - src/graphql/**/*.ts
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: typescript
+        generatedFileName: src/API.ts
+        docsFilePath: src/graphql
+        region: ap-northeast-2
+        apiId: 4in3zaqx6fhy3chvjwwyxbxnza
+        maxDepth: 2
