@@ -3,13 +3,20 @@ import Square from './Square'
 
 interface SquareRowProps {
   squarePerRow: number
+  lineIndex: number
+  lineTotal: number
 }
 
-const SquareRow = (props: SquareRowProps) => {
+const SquareRow = ({ squarePerRow, lineIndex, lineTotal }: SquareRowProps) => {
   return (
-    <div style={{ width: props.squarePerRow * 20 }}>
-      {[...Array(props.squarePerRow).keys()].map((num) => (
-        <Square key={num}></Square>
+    <div style={{ width: squarePerRow * 30 }}>
+      {[...Array(squarePerRow).keys()].map((num) => (
+        <Square
+          key={num}
+          lineTotal={lineTotal}
+          squareIndex={num + lineIndex * squarePerRow}
+          squarePerRow={squarePerRow}
+        ></Square>
       ))}
     </div>
   )

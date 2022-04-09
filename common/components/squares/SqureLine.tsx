@@ -2,16 +2,23 @@ import { Fragment } from 'react'
 import SquareRow from './SquareRow'
 
 interface SquareLineProps {
-  lineNumber: number
+  lineTotal: number
   squarePerRow: number
 }
 
-const SqureLine = (props: SquareLineProps) => {
+const SqureLine = ({ lineTotal, squarePerRow }: SquareLineProps) => {
   return (
     <Fragment>
-      {[...Array(props.lineNumber)].map((num, index) => (
-        <SquareRow key={index} squarePerRow={props.squarePerRow}></SquareRow>
-      ))}
+      {[...Array(lineTotal).keys()].map((numb: number, index) => {
+        return (
+          <SquareRow
+            key={index}
+            lineTotal={lineTotal}
+            lineIndex={numb}
+            squarePerRow={squarePerRow}
+          ></SquareRow>
+        )
+      })}
     </Fragment>
   )
 }
