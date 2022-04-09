@@ -1,19 +1,17 @@
-import * as React from 'react'
+import type { AppProps } from 'next/app'
 import Head from 'next/head'
-import { AppProps } from 'next/app'
 import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import { CacheProvider, EmotionCache } from '@emotion/react'
 import theme from 'common/config/theme'
 import createEmotionCache from 'common/utils/createEmotionCache'
 import { RecoilRoot } from 'recoil'
-
-// Client-side cache, shared for the whole session of the user in the browser.
-const clientSideEmotionCache = createEmotionCache()
-
+import AppBar from 'common/components/AppBar'
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache
 }
+// Client-side cache, shared for the whole session of the user in the browser.
+const clientSideEmotionCache = createEmotionCache()
 
 export default function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
@@ -26,7 +24,9 @@ export default function MyApp(props: MyAppProps) {
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <RecoilRoot>
-          <Component {...pageProps} />
+          <AppBar>
+            <Component {...pageProps} />
+          </AppBar>
         </RecoilRoot>
       </ThemeProvider>
     </CacheProvider>
