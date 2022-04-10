@@ -16,15 +16,22 @@ interface SquareProps {
   squareIndex: number
   lineTotal: number
   squarePerRow: number
+  mineTotal: number
 }
 
-const Square = ({ squareIndex, lineTotal, squarePerRow }: SquareProps) => {
+const Square = ({
+  squareIndex,
+  lineTotal,
+  squarePerRow,
+  mineTotal,
+}: SquareProps) => {
   const [opened, setOpened] = useState(false)
   return opened ? (
     <OpenedSquare
       lineTotal={lineTotal}
       squareIndex={squareIndex}
       squarePerRow={squarePerRow}
+      mineTotal={mineTotal}
     ></OpenedSquare>
   ) : (
     <ClosedSquare

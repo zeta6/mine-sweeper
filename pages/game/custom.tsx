@@ -35,7 +35,11 @@ const TempGame: NextPage = () => {
           alignItems: 'center',
         }}
       >
-        <SqureLine lineTotal={squreRow} squarePerRow={squreLine}></SqureLine>
+        <SqureLine
+          lineTotal={squreRow}
+          squarePerRow={squreLine}
+          mineTotal={0}
+        ></SqureLine>
       </Box>
       <Link href="/">
         <Button>go to home</Button>

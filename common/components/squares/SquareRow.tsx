@@ -5,9 +5,15 @@ interface SquareRowProps {
   squarePerRow: number
   lineIndex: number
   lineTotal: number
+  mineTotal: number
 }
 
-const SquareRow = ({ squarePerRow, lineIndex, lineTotal }: SquareRowProps) => {
+const SquareRow = ({
+  squarePerRow,
+  lineIndex,
+  lineTotal,
+  mineTotal,
+}: SquareRowProps) => {
   return (
     <div style={{ width: squarePerRow * 30 }}>
       {[...Array(squarePerRow).keys()].map((num) => (
@@ -16,6 +22,7 @@ const SquareRow = ({ squarePerRow, lineIndex, lineTotal }: SquareRowProps) => {
           lineTotal={lineTotal}
           squareIndex={num + lineIndex * squarePerRow}
           squarePerRow={squarePerRow}
+          mineTotal={mineTotal}
         ></Square>
       ))}
     </div>

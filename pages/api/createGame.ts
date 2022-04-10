@@ -8,7 +8,6 @@ import { checkMineAround } from 'common/utils/game/checkMineAround'
 import { getCheckList } from 'common/utils/game/getCheckList'
 import { GraphQLResult } from '@aws-amplify/api'
 Amplify.configure({ ...awsExports })
-// , ssr: true })
 
 export default async function handle(
   req: NextApiRequest,
@@ -27,6 +26,7 @@ export default async function handle(
       input: {
         mines: minesStr,
         mine_total: req.body.mineTotal,
+        active: true,
       },
     },
   })

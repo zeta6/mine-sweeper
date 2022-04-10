@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { getMines } from 'common/utils/game/getMines'
 
 import { Amplify, API } from 'aws-amplify'
 import awsExports from 'src/aws-exports'
@@ -23,10 +22,12 @@ export default async function handle(
       input: {
         id: req.body.gameId,
         click_count: req.body.clickCount,
-        // active: false,
       },
     },
   })
+  if (resp.data.updateGame.active === false) {
+    res.send({ error: 'The game is not active.' })
+  }
   const mines = resp.data.updateGame.mines.split(',').map(Number)
   if (checkMine(req.body.index, mines)) {
     const resp2: GraphQLResult<any> = await API.graphql({
@@ -40,14 +41,10 @@ export default async function handle(
         },
       },
     })
+    console.log('resp2', resp2)
     res.send({ mineAround: -1 })
   } else {
-    const checkList = getCheckList(
-      req.body.index,
-      req.body.squarePerRow,
-      req.body.squareTotal
-    )
-    const mineAround: number = checkMineAround(checkList, mines)
+    const mineAround: number = checkMineAround(req.body.aroundPoints, mines)
     res.send({
       mineAround: mineAround,
     })

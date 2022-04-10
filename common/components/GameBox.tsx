@@ -8,6 +8,7 @@ interface GameBoxProps {
 interface GameDiff {
   squareRow: number
   squareLine: number
+  mineTotal: number
 }
 
 interface Games {
@@ -17,18 +18,21 @@ interface Games {
   hard: GameDiff
 }
 
-const games: Games = {
+export const games: Games = {
   easy: {
     squareRow: 9,
     squareLine: 9,
+    mineTotal: 10,
   },
   normal: {
     squareRow: 16,
     squareLine: 16,
+    mineTotal: 40,
   },
   hard: {
     squareRow: 16,
     squareLine: 30,
+    mineTotal: 99,
   },
 }
 
@@ -47,6 +51,7 @@ const GameBox = ({ diff }: GameBoxProps) => {
       <SqureLine
         lineTotal={games[diff].squareRow}
         squarePerRow={games[diff].squareLine}
+        mineTotal={games[diff].mineTotal}
       ></SqureLine>
     </Box>
   )

@@ -1,5 +1,3 @@
-import * as React from 'react'
-import { useRouter } from 'next/router'
 import type { NextPage } from 'next'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
@@ -7,15 +5,6 @@ import Box from '@mui/material/Box'
 import Link from 'common/components/link/Link'
 import Copyright from '../common/components/copy-right/Copyright'
 import { Button } from '@mui/material'
-import axios from 'axios'
-
-import { getMines } from 'common/utils/game/getMines'
-import { createGame } from 'common/utils/game/createGame'
-
-const minesTotal = 20
-const squreRow = 10
-const squreLine = 10
-
 // const apiTest = async () => {
 // const num = await createGame()
 // console.log('num', num)

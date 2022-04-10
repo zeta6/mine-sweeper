@@ -5,7 +5,8 @@ export const trySweep = async (
   squareTotal: number,
   squarePerRow: number,
   gameId: string,
-  clickCount: number
+  clickCount: number,
+  aroundPoints: number[]
 ) => {
   const result = await axios.post('/api/trySweep', {
     index: index,
@@ -13,6 +14,7 @@ export const trySweep = async (
     squarePerRow: squarePerRow,
     gameId: gameId,
     clickCount: clickCount,
+    aroundPoints: aroundPoints,
   })
   return result
 }
