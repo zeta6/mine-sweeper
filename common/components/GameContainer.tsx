@@ -73,7 +73,15 @@ const GameContainer = ({ diff, gameMode }: GameContainerProps) => {
       </Box>
       <GameBox diff={diff} gameMode={gameMode}></GameBox>
       {/* <Link href="/"> */}
-      <Button onClick={() => window.location.reload()}>New Game</Button>
+      <div style={{ display: 'flex' }}>
+        <Button
+          variant="outlined"
+          sx={{ margin: '0 auto' }}
+          onClick={() => window.location.reload()}
+        >
+          New Game
+        </Button>
+      </div>
       {/* </Link> */}
     </Container>
   )
