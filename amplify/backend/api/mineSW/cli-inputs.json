@@ -3,7 +3,7 @@
   "serviceConfiguration": {
     "apiName": "mineSW",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/tmp/amplify-3bdede37-eb86-48fb-8363-a114ec2bbf89/amplify/backend/api/mineSW/schema.graphql",
+    "gqlSchemaPath": "/home/ohjin/works/mine-sweeper/amplify/backend/api/mineSW/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
       "keyDescription": "api key description",
@@ -14,10 +14,6 @@
         "mode": "AWS_IAM"
       }
     ],
-    "conflictResolution": {
-      "defaultResolutionStrategy": {
-        "type": "AUTOMERGE"
-      }
-    }
+    "conflictResolution": {}
   }
 }

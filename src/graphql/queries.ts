@@ -8,11 +8,10 @@ export const getGame = /* GraphQL */ `
       id
       mines
       mine_total
+      click_count
+      active
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -27,42 +26,12 @@ export const listGames = /* GraphQL */ `
         id
         mines
         mine_total
+        click_count
+        active
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncGames = /* GraphQL */ `
-  query SyncGames(
-    $filter: ModelGameFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncGames(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        mines
-        mine_total
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;

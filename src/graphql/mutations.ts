@@ -11,11 +11,10 @@ export const createGame = /* GraphQL */ `
       id
       mines
       mine_total
+      click_count
+      active
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -28,11 +27,10 @@ export const updateGame = /* GraphQL */ `
       id
       mines
       mine_total
+      click_count
+      active
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -45,11 +43,10 @@ export const deleteGame = /* GraphQL */ `
       id
       mines
       mine_total
+      click_count
+      active
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;

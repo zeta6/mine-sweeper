@@ -2,4 +2,7 @@ type Game @model @auth(rules: [{allow: public}]) {
   id: ID!
   mines: String
   mine_total: Int
+  click_count: Int
+  active: Boolean
 }
+ 
