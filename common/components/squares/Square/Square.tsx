@@ -27,7 +27,10 @@ const Square = ({ squareIndex, lineTotal, squarePerRow }: SquareProps) => {
       squarePerRow={squarePerRow}
     ></OpenedSquare>
   ) : (
-    <ClosedSquare setOpened={setOpened}></ClosedSquare>
+    <ClosedSquare
+      setOpened={setOpened}
+      squareIndex={squareIndex}
+    ></ClosedSquare>
   )
 }
 //     <div
