@@ -6,12 +6,15 @@ export type CreateGameInput = {
   id?: string | null,
   mines?: string | null,
   mine_total?: number | null,
-  _version?: number | null,
+  click_count?: number | null,
+  active?: boolean | null,
 };
 
 export type ModelGameConditionInput = {
   mines?: ModelStringInput | null,
   mine_total?: ModelIntInput | null,
+  click_count?: ModelIntInput | null,
+  active?: ModelBooleanInput | null,
   and?: Array< ModelGameConditionInput | null > | null,
   or?: Array< ModelGameConditionInput | null > | null,
   not?: ModelGameConditionInput | null,
@@ -69,34 +72,42 @@ export type ModelIntInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
+export type ModelBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
 export type Game = {
   __typename: "Game",
   id: string,
   mines?: string | null,
   mine_total?: number | null,
+  click_count?: number | null,
+  active?: boolean | null,
   createdAt: string,
   updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
 };
 
 export type UpdateGameInput = {
   id: string,
   mines?: string | null,
   mine_total?: number | null,
-  _version?: number | null,
+  click_count?: number | null,
+  active?: boolean | null,
 };
 
 export type DeleteGameInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type ModelGameFilterInput = {
   id?: ModelIDInput | null,
   mines?: ModelStringInput | null,
   mine_total?: ModelIntInput | null,
+  click_count?: ModelIntInput | null,
+  active?: ModelBooleanInput | null,
   and?: Array< ModelGameFilterInput | null > | null,
   or?: Array< ModelGameFilterInput | null > | null,
   not?: ModelGameFilterInput | null,
@@ -122,7 +133,6 @@ export type ModelGameConnection = {
   __typename: "ModelGameConnection",
   items:  Array<Game | null >,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type CreateGameMutationVariables = {
@@ -136,11 +146,10 @@ export type CreateGameMutation = {
     id: string,
     mines?: string | null,
     mine_total?: number | null,
+    click_count?: number | null,
+    active?: boolean | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -155,11 +164,10 @@ export type UpdateGameMutation = {
     id: string,
     mines?: string | null,
     mine_total?: number | null,
+    click_count?: number | null,
+    active?: boolean | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -174,11 +182,10 @@ export type DeleteGameMutation = {
     id: string,
     mines?: string | null,
     mine_total?: number | null,
+    click_count?: number | null,
+    active?: boolean | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -192,11 +199,10 @@ export type GetGameQuery = {
     id: string,
     mines?: string | null,
     mine_total?: number | null,
+    click_count?: number | null,
+    active?: boolean | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -214,40 +220,12 @@ export type ListGamesQuery = {
       id: string,
       mines?: string | null,
       mine_total?: number | null,
+      click_count?: number | null,
+      active?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncGamesQueryVariables = {
-  filter?: ModelGameFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncGamesQuery = {
-  syncGames?:  {
-    __typename: "ModelGameConnection",
-    items:  Array< {
-      __typename: "Game",
-      id: string,
-      mines?: string | null,
-      mine_total?: number | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -257,11 +235,10 @@ export type OnCreateGameSubscription = {
     id: string,
     mines?: string | null,
     mine_total?: number | null,
+    click_count?: number | null,
+    active?: boolean | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -271,11 +248,10 @@ export type OnUpdateGameSubscription = {
     id: string,
     mines?: string | null,
     mine_total?: number | null,
+    click_count?: number | null,
+    active?: boolean | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -285,10 +261,9 @@ export type OnDeleteGameSubscription = {
     id: string,
     mines?: string | null,
     mine_total?: number | null,
+    click_count?: number | null,
+    active?: boolean | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
