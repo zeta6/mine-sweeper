@@ -30,17 +30,11 @@ export default async function handle(
       },
     },
   })
-  const checkList = getCheckList(
-    req.body.firstIndex,
-    req.body.squarePerRow,
-    req.body.squareTotal
-  )
 
-  const mineAround: number = checkMineAround(checkList, mines)
+  const mineAround: number = checkMineAround(req.body.aroundPoints, mines)
 
   res.send({
     gameId: resp.data.createGame.id,
-    mines: resp.data.createGame.mines,
     mineAround: mineAround,
   })
 }

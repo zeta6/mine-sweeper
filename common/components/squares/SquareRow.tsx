@@ -6,6 +6,7 @@ interface SquareRowProps {
   lineIndex: number
   lineTotal: number
   mineTotal: number
+  gameMode: string
 }
 
 const SquareRow = ({
@@ -13,6 +14,7 @@ const SquareRow = ({
   lineIndex,
   lineTotal,
   mineTotal,
+  gameMode,
 }: SquareRowProps) => {
   return (
     <div style={{ width: squarePerRow * 30 }}>
@@ -23,6 +25,7 @@ const SquareRow = ({
           squareIndex={num + lineIndex * squarePerRow}
           squarePerRow={squarePerRow}
           mineTotal={mineTotal}
+          gameMode={gameMode}
         ></Square>
       ))}
     </div>

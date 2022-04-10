@@ -17,6 +17,7 @@ interface SquareProps {
   lineTotal: number
   squarePerRow: number
   mineTotal: number
+  gameMode: string
 }
 
 const Square = ({
@@ -24,6 +25,7 @@ const Square = ({
   lineTotal,
   squarePerRow,
   mineTotal,
+  gameMode,
 }: SquareProps) => {
   const [opened, setOpened] = useState(false)
   return opened ? (
@@ -32,6 +34,7 @@ const Square = ({
       squareIndex={squareIndex}
       squarePerRow={squarePerRow}
       mineTotal={mineTotal}
+      gameMode={gameMode}
     ></OpenedSquare>
   ) : (
     <ClosedSquare

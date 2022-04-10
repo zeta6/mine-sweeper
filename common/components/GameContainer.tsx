@@ -4,23 +4,24 @@ import { flagedSquresLenState } from 'common/atoms/flagedSquares'
 import { openedSquaresLenState } from 'common/atoms/openedSquares'
 import { userAliveState } from 'common/atoms/userAlive'
 import { useEffect, useState } from 'react'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import GameBox, { games } from './GameBox'
 import Link from './link/Link'
 
 interface GameContainerProps {
   diff: string
+  gameMode: string
 }
 
-const GameContainer = ({ diff }: GameContainerProps) => {
+const GameContainer = ({ diff, gameMode }: GameContainerProps) => {
   const squaresTotal = games[diff].squareRow * games[diff].squareLine
-  const [isLoading, setLoading] = useState(true)
+  const flagCount = useRecoilValue(flagedSquresLenState)
+  const opendCount = useRecoilValue(openedSquaresLenState)
   const clickCount = useRecoilValue(clickCountState)
+  const [isLoading, setLoading] = useState(true)
   const userAlive = useRecoilValue(userAliveState)
   const [time, setTime] = useState(0)
   const [notOpened, setNotOpened] = useState(squaresTotal)
-  const flagCount = useRecoilValue(flagedSquresLenState)
-  const opendCount = useRecoilValue(openedSquaresLenState)
   const [complete, setComplete] = useState(false)
   const mineTotal = games[diff].mineTotal
   useEffect(() => {
@@ -29,23 +30,17 @@ const GameContainer = ({ diff }: GameContainerProps) => {
       window.location.reload()
     }
   }, [])
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     setTime((time) => time + 1)
-  //   }, 1000)
-  //   console.log('userAlive', userAlive)
-  //   if (userAlive === false) {
-  //     clearInterval(timer)
-  //     setTime(0)
-  //   }
-  //   return () => clearInterval(timer)
-  // }, [userAlive])
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime((time) => time + 1)
+    }, 1000)
+    if (userAlive === false || complete === true) {
+      clearInterval(timer)
+    }
+    return () => clearInterval(timer)
+  }, [userAlive, complete])
 
   useEffect(() => {
-    console.log('opendCount', opendCount)
-    console.log('squaresTotal - opendCount', squaresTotal - opendCount)
-    console.log('mineTotal', mineTotal)
-    console.log('comp', complete)
     setNotOpened(squaresTotal - opendCount)
     squaresTotal - opendCount <= mineTotal && setComplete(true)
   }, [opendCount])
@@ -63,6 +58,7 @@ const GameContainer = ({ diff }: GameContainerProps) => {
         }}
       >
         <Typography variant="h4" component="h1" gutterBottom>
+          game mode: {gameMode} <br></br>
           alive: {userAlive ? 'alive' : 'dead'} <br></br>
           time : {time}
           <br></br>
@@ -75,7 +71,7 @@ const GameContainer = ({ diff }: GameContainerProps) => {
           complete: {complete ? 'Great. Done.' : 'Not yet'}
         </Typography>
       </Box>
-      <GameBox diff={diff}></GameBox>
+      <GameBox diff={diff} gameMode={gameMode}></GameBox>
       {/* <Link href="/"> */}
       <Button onClick={() => window.location.reload()}>New Game</Button>
       {/* </Link> */}

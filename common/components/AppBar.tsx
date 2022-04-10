@@ -1,4 +1,4 @@
-import { BaseSyntheticEvent, useState } from 'react'
+import { BaseSyntheticEvent, useEffect, useState } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -11,6 +11,9 @@ import Button from '@mui/material/Button'
 import MenuItem from '@mui/material/MenuItem'
 import Link from 'common/components/link/Link'
 import { useRouter } from 'next/router'
+import { Stack } from '@mui/material'
+import { styled } from '@mui/material/styles'
+import Switch from '@mui/material/Switch'
 
 type Props = {
   children: JSX.Element | JSX.Element[] | string | string[]
@@ -28,17 +31,60 @@ const pages: Array<GamePage> = [
   { str: '커스텀', diff: 'custom' },
 ]
 
+const AntSwitch = styled(Switch)(({ theme }) => ({
+  width: 28,
+  height: 16,
+  padding: 0,
+  display: 'flex',
+  '&:active': {
+    '& .MuiSwitch-thumb': {
+      width: 15,
+    },
+    '& .MuiSwitch-switchBase.Mui-checked': {
+      transform: 'translateX(9px)',
+    },
+  },
+  '& .MuiSwitch-switchBase': {
+    padding: 2,
+    '&.Mui-checked': {
+      transform: 'translateX(12px)',
+      color: '#fff',
+      '& + .MuiSwitch-track': {
+        opacity: 1,
+        backgroundColor: theme.palette.mode === 'dark' ? '#177ddc' : '#1890ff',
+      },
+    },
+  },
+  '& .MuiSwitch-thumb': {
+    boxShadow: '0 2px 4px 0 rgb(0 35 11 / 20%)',
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+    transition: theme.transitions.create(['width'], {
+      duration: 200,
+    }),
+  },
+  '& .MuiSwitch-track': {
+    borderRadius: 16 / 2,
+    opacity: 1,
+    backgroundColor:
+      theme.palette.mode === 'dark'
+        ? 'rgba(255,255,255,.35)'
+        : 'rgba(0,0,0,.25)',
+    boxSizing: 'border-box',
+  },
+}))
+
 const ResponsiveAppBar = ({ children }: Props) => {
   const router = useRouter()
   const [anchorElNav, setAnchorElNav] = useState(null)
-
   const handleOpenNavMenu = (e: BaseSyntheticEvent) => {
     setAnchorElNav(e.currentTarget)
   }
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
   }
+  const [gameMode, setGameMode] = useState('local')
 
   return (
     <>
@@ -59,7 +105,25 @@ const ResponsiveAppBar = ({ children }: Props) => {
             >
               Mine Sweeper
             </Typography>
-
+            <Stack
+              direction="row"
+              spacing={1}
+              alignItems="center"
+              sx={{ ml: 4, mr: 4 }}
+            >
+              <Typography>GameMode:</Typography>
+              <Typography>local</Typography>
+              <AntSwitch
+                inputProps={{ 'aria-label': 'ant design' }}
+                onChange={(e) => {
+                  e.target.checked
+                    ? setGameMode('server')
+                    : setGameMode('local')
+                  console.log(gameMode)
+                }}
+              />
+              <Typography>server</Typography>
+            </Stack>
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
                 size="large"
@@ -90,7 +154,14 @@ const ResponsiveAppBar = ({ children }: Props) => {
                 }}
               >
                 {pages.map((page, index) => (
-                  <Link href={`/game/${page.diff}`} key={index}>
+                  <Link
+                    href={
+                      gameMode === 'server'
+                        ? `/game/${page.diff}`
+                        : `/localGame/${page.diff}`
+                    }
+                    key={index}
+                  >
                     <MenuItem key={index}>
                       {/* //  onClick={handleCloseNavMenu}> */}
                       <Typography textAlign="center">{page.str}</Typography>
@@ -109,7 +180,14 @@ const ResponsiveAppBar = ({ children }: Props) => {
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page, index) => (
-                <Link href={`/game/${page.diff}`} key={index}>
+                <Link
+                  href={
+                    gameMode === 'server'
+                      ? `/game/${page.diff}`
+                      : `/localGame/${page.diff}`
+                  }
+                  key={index}
+                >
                   <Button
                     // onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: 'white', display: 'block' }}

@@ -3,6 +3,7 @@ import SqureLine from './squares/SqureLine'
 
 interface GameBoxProps {
   diff: string
+  gameMode: string
 }
 
 interface GameDiff {
@@ -36,7 +37,7 @@ export const games: Games = {
   },
 }
 
-const GameBox = ({ diff }: GameBoxProps) => {
+const GameBox = ({ diff, gameMode }: GameBoxProps) => {
   console.log('diff', diff)
   return (
     <Box
@@ -52,6 +53,7 @@ const GameBox = ({ diff }: GameBoxProps) => {
         lineTotal={games[diff].squareRow}
         squarePerRow={games[diff].squareLine}
         mineTotal={games[diff].mineTotal}
+        gameMode={gameMode}
       ></SqureLine>
     </Box>
   )

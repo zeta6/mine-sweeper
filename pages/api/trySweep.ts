@@ -4,7 +4,6 @@ import { Amplify, API } from 'aws-amplify'
 import awsExports from 'src/aws-exports'
 import { updateGame } from 'src/graphql/mutations'
 import { checkMine, checkMineAround } from 'common/utils/game/checkMineAround'
-import { getCheckList } from 'common/utils/game/getCheckList'
 import { GraphQLResult } from '@aws-amplify/api'
 Amplify.configure({ ...awsExports })
 // , ssr: true })
@@ -30,7 +29,7 @@ export default async function handle(
   }
   const mines = resp.data.updateGame.mines.split(',').map(Number)
   if (checkMine(req.body.index, mines)) {
-    const resp2: GraphQLResult<any> = await API.graphql({
+    await API.graphql({
       authMode: 'API_KEY',
       query: updateGame,
       variables: {
@@ -41,7 +40,6 @@ export default async function handle(
         },
       },
     })
-    console.log('resp2', resp2)
     res.send({ mineAround: -1 })
   } else {
     const mineAround: number = checkMineAround(req.body.aroundPoints, mines)
