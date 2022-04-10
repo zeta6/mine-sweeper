@@ -33,7 +33,7 @@ const GameContainer = ({ diff }: GameContainerProps) => {
     return () => clearInterval(timer)
   }, [userAlive])
   return isLoading ? (
-    'loading'
+    <Container maxWidth="lg">loading</Container>
   ) : (
     <Container maxWidth="lg">
       <Box
