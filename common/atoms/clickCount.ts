@@ -1,6 +1,6 @@
 import { atom } from 'recoil'
 
-export const leftClickCountState = atom({
-  key: 'leftClickCountState',
+export const clickCountState = atom({
+  key: 'clickCountState',
   default: 0,
 })
