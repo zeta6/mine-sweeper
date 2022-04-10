@@ -1,42 +1,48 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { getMines } from 'common/utils/game/getMines'
 
-// import { Game as game } from 'sequelize_/model/game'
+import { Amplify, API } from 'aws-amplify'
+import awsExports from 'src/aws-exports'
+import { createGame } from 'src/graphql/mutations'
+import {
+  checkMineAround,
+  getCheckList,
+} from 'common/utils/game/checkAroundMine'
+import { GraphQLResult } from '@aws-amplify/api'
+Amplify.configure({ ...awsExports })
+// , ssr: true })
 
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log('req', req)
-  console.log('res', res)
-  // console.log('Game', Game)
-  // console.log('requested')
-  // Game.create({ mines: [1, 2, 3] })
-  // res.send('300')
-  // const postId = req.query.id
-  // if (req.method === 'GET') {
-  //   handleGET(postId, res)
-  // } else if (req.method === 'DELETE') {
-  //   handleDELETE(postId, res)
-  // } else {
-  //   throw new Error(
-  //     `The HTTP ${req.method} method is not supported at this route.`
-  //   )
-  // }
+  const mines = getMines(
+    req.body.firstIndex,
+    req.body.mineTotal,
+    req.body.squareTotal
+  )
+  const minesStr = mines.toString()
+  const resp: GraphQLResult<any> = await API.graphql({
+    authMode: 'API_KEY',
+    query: createGame,
+    variables: {
+      input: {
+        mines: minesStr,
+        mine_total: req.body.mineTotal,
+      },
+    },
+  })
+  const checkList = getCheckList(
+    req.body.firstIndex,
+    req.body.squarePerRow,
+    req.body.squareTotal
+  )
+
+  const mineAround: number = checkMineAround(checkList, mines)
+
+  res.send({
+    gameId: resp.data.createGame.id,
+    mines: resp.data.createGame.mines,
+    mineAround: mineAround,
+  })
 }
-
-// // GET /api/post/:id
-// async function handleGET(postId, res) {
-//   const post = await prisma.post.findUnique({
-//     where: { id: Number(postId) },
-//     include: { author: true },
-//   })
-//   res.json(post)
-// }
-
-// // DELETE /api/post/:id
-// async function handleDELETE(postId, res) {
-//   const post = await prisma.post.delete({
-//     where: { id: Number(postId) },
-//   })
-//   res.json(post)
-// }

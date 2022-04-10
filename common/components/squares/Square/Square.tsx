@@ -1,16 +1,16 @@
 import axios from 'axios'
-import { leftClickCountState } from 'common/atoms/clickCount'
+import { clickCountState } from 'common/atoms/clickCount'
 import { createGame } from 'common/utils/game/createGame'
 import { Component, SetStateAction, useState } from 'react'
 
 import OpenedSquare from './OpenedSqaure'
 import ClosedSquare from './ClosedSquare'
 
-const doAttempt = (leftClickCountState: number) => {
-  if (leftClickCountState === 0) {
-    createGame()
-  }
-}
+// const doAttempt = (leftClickCountState: number) => {
+//   if (leftClickCountState === 0) {
+//     createGame()
+//   }
+// }
 
 interface SquareProps {
   squareIndex: number

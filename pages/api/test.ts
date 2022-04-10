@@ -12,18 +12,19 @@ export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  // const mines = getMines(req.body.mineTotal, req.body.squareTotal)
+  // const minesStr = mines.toString()
   const resp = await API.graphql({
     authMode: 'API_KEY',
     query: createGame,
     variables: {
       input: {
-        mines: '1,2,3,4,5',
-        mine_total: 5,
+        // mines: minesStr,
+        mine_total: req.body.mineTotal,
       },
     },
   })
   console.log('resp:', resp)
-  // const mines = getMines(req.body.mineTotal, req.body.squareTotal)
   res.send({ game: resp })
 }
 

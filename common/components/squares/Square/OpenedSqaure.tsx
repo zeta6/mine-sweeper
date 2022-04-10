@@ -1,9 +1,10 @@
-import { checkBtn } from 'common/utils/game/checkBtn'
-import { leftClickCountState } from 'common/atoms/clickCount'
+import { clickCountState } from 'common/atoms/clickCount'
+import { gameIdState } from 'common/atoms/gameId'
 import { useRecoilState } from 'recoil'
-import axios from 'axios'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { checkAroundMine } from 'common/utils/game/checkAroundMine'
+import { createGame } from 'common/utils/game/createGame'
+import { trySweep } from 'common/utils/game/trySweep'
 
 interface OpenedSqaureProps {
   squareIndex: number
@@ -16,20 +17,50 @@ const OpenedSquare = ({
   squarePerRow,
   lineTotal,
 }: OpenedSqaureProps) => {
-  console.log('squareIndex', squareIndex)
+  const [clickCount, setClickCount] = useRecoilState(clickCountState)
+  const [gameId, setGameID] = useRecoilState(gameIdState)
+  const [mineAround, setMineAround] = useState(0)
+  const [isLoading, setLoading] = useState(true)
+  const squareTotal = squarePerRow * lineTotal
+  const mineTotal = 10
+  const num = 0
+  // const [minesAround, setminesAroud] = useState(0)
+  useEffect(() => {
+    if (clickCount === 0) {
+      setClickCount(clickCount + 1)
+      console.log('clickCount', clickCount)
+      const fetchData = async () => {
+        const resp = await createGame(
+          squareIndex,
+          mineTotal,
+          squareTotal,
+          squarePerRow
+        )
+        console.log('resp', resp.data.mineAround)
+        setMineAround(resp.data.mineAround)
+        setGameID(resp.data.gameId)
+        setLoading(false)
+      }
+      fetchData()
+    } else {
+      setClickCount(clickCount + 1)
+      console.log('clickCount', clickCount)
+      const fetchData = async () => {
+        const resp = await trySweep(
+          squareIndex,
+          squareTotal,
+          squarePerRow,
+          gameId
+        )
+        console.log('resp', resp.data.mineAround)
+        setMineAround(resp.data.mineAround)
+        setLoading(false)
+      }
+      fetchData()
+    }
+  }, [])
   const check = checkAroundMine(squareIndex, squarePerRow, lineTotal)
   console.log('check', check)
-
-  const [leftClickCnt, setLeftClickCnt] = useRecoilState(leftClickCountState)
-  // useEffect(() => {
-  //   if (leftClickCnt === 0) {
-  //     axios.post('/api/newGame')
-  //     setLeftClickCnt(leftClickCnt + 1)
-  //   } else {
-  //     axios.post('api/mineCheck')
-  //     setLeftClickCnt(leftClickCnt + 1)
-  //   }
-  // }, [leftClickCnt, setLeftClickCnt])
   return (
     <div
       style={{
@@ -41,7 +72,9 @@ const OpenedSquare = ({
       }}
       // onMouseDown={(e) => console.log(setFlag(e.button))}
       onContextMenu={(e) => e.preventDefault()}
-    ></div>
+    >
+      {isLoading ? '' : mineAround === -1 ? 'M' : mineAround}
+    </div>
   )
 }
 

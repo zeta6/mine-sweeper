@@ -9,17 +9,24 @@ import Copyright from '../common/components/copy-right/Copyright'
 import { Button } from '@mui/material'
 import axios from 'axios'
 
+import { getMines } from 'common/utils/game/getMines'
+import { createGame } from 'common/utils/game/createGame'
+
 const minesTotal = 20
 const squreRow = 10
 const squreLine = 10
 
-const apiTest = async () => {
-  const result = await axios.post('/api/test', {
-    mineTotal: minesTotal,
-    squareTotal: squreRow * squreLine,
-  })
-  console.log('result', result)
-}
+// const apiTest = async () => {
+// const num = await createGame()
+// console.log('num', num)
+// const result = await axios.post('/api/test', {
+//   mineTotal: minesTotal,
+//   squareTotal: squreRow * squreLine,
+// })
+// console.log('result', result)
+// const mmm = getMines(1, 20, 30)
+// console.log('mmm', mmm)
+// }
 
 const Home: NextPage = () => {
   // const router = useRouter()
@@ -43,7 +50,10 @@ const Home: NextPage = () => {
         </Typography>
         <Copyright />
       </Box>
-      <Button onClick={() => apiTest()}> test </Button>
+      {/* <Button onClick={() => apiTest()}> test </Button> */}
+      <Link href="/tempGame">
+        <Button>test game page</Button>
+      </Link>
     </Container>
   )
 }

@@ -1,6 +1,7 @@
 import { getRandomInt } from 'common/utils/game/getRandomInt'
 
 export const getMines = (
+  firstIndex: number,
   mineTotal: number,
   squareTotal: number
 ): Array<number> => {
@@ -8,7 +9,7 @@ export const getMines = (
   const mines: number[] = []
   while (mineCount < mineTotal) {
     const mine = getRandomInt(0, squareTotal)
-    if (!mines.includes(mine)) {
+    if (!mines.includes(mine) && mine !== firstIndex) {
       mines.push(mine)
       mineCount = mineCount + 1
     }
