@@ -106,7 +106,6 @@ const OpenedSquare = ({
         border: 'black solid 2px',
         display: 'table-cell',
       }}
-      // onMouseDown={(e) => console.log(setFlag(e.button))}
       onContextMenu={(e) => e.preventDefault()}
       onMouseDown={(e) => {
         if (checkBtn(e.button)) {
@@ -116,7 +115,6 @@ const OpenedSquare = ({
                 .concat(aroundPoints)
                 .filter((point) => !flagedSquares.includes(point))
             )
-            console.log('setArr', setArr)
             setOpenedSquares([...setArr])
           }
         }

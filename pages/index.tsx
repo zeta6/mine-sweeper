@@ -5,24 +5,8 @@ import Box from '@mui/material/Box'
 import Link from 'common/components/link/Link'
 import Copyright from '../common/components/copy-right/Copyright'
 import { Button } from '@mui/material'
-// const apiTest = async () => {
-// const num = await createGame()
-// console.log('num', num)
-// const result = await axios.post('/api/test', {
-//   mineTotal: minesTotal,
-//   squareTotal: squreRow * squreLine,
-// })
-// console.log('result', result)
-// const mmm = getMines(1, 20, 30)
-// console.log('mmm', mmm)
-// }
 
 const Home: NextPage = () => {
-  // const router = useRouter()
-  // React.useEffect(() => {
-  //   router.push('/tempGame')
-  // }, [router])
-
   return (
     <Container maxWidth="lg">
       <Box
@@ -39,10 +23,6 @@ const Home: NextPage = () => {
         </Typography>
         <Copyright />
       </Box>
-      {/* <Button onClick={() => apiTest()}> test </Button> */}
-      <Link href="/tempGame">
-        <Button>test game page</Button>
-      </Link>
     </Container>
   )
 }

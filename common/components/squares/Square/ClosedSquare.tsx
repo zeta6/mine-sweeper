@@ -5,7 +5,6 @@ import { flagedSquaresState } from 'common/atoms/flagedSquares'
 import { userAliveState } from 'common/atoms/userAlive'
 import { SetterOrUpdater, useRecoilState } from 'recoil'
 import { clickCountState } from 'common/atoms/clickCount'
-
 interface ClosedSquarePorps {
   squareIndex: number
   setOpened: (opened: boolean) => void
@@ -42,7 +41,6 @@ const ClosedSquare = ({ squareIndex, setOpened }: ClosedSquarePorps) => {
   useEffect(() => {
     if (openedSquares.includes(squareIndex)) {
       !flagedSquares.includes(squareIndex) && setOpened(true)
-      console.log('openedSquares', openedSquares)
     }
   }, [openedSquares])
   return (
@@ -75,7 +73,6 @@ const ClosedSquare = ({ squareIndex, setOpened }: ClosedSquarePorps) => {
                 setFlagedSquares,
                 setFlag
               )
-          console.log('flagedSquares::', flagedSquares)
         }
       }}
       onContextMenu={(e) => e.preventDefault()}

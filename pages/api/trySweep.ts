@@ -6,14 +6,11 @@ import { updateGame } from 'src/graphql/mutations'
 import { checkMine, checkMineAround } from 'common/utils/game/checkMineAround'
 import { GraphQLResult } from '@aws-amplify/api'
 Amplify.configure({ ...awsExports })
-// , ssr: true })
-// const mines = [1]
 
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // console.log('req.body.gameId', req.body.gameId)
   const resp: GraphQLResult<any> = await API.graphql({
     authMode: 'API_KEY',
     query: updateGame,

@@ -10,11 +10,7 @@ export const checkMine = (point: number, mines: number[]) => {
 
 export const checkMineAround = (checkList: number[], mines: number[]) => {
   let count = 0
-  console.log('checkList', checkList)
-  console.log('mines', mines)
   checkList.forEach((num) => {
-    console.log('num', num)
-    console.log(mines.includes(num))
     if (mines.includes(num)) count = count + 1
   })
   return count

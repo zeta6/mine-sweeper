@@ -38,7 +38,6 @@ export const games: Games = {
 }
 
 const GameBox = ({ diff, gameMode }: GameBoxProps) => {
-  console.log('diff', diff)
   return (
     <Box
       sx={{
