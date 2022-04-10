@@ -84,7 +84,11 @@ const ResponsiveAppBar = ({ children }: Props) => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
   }
-  const [gameMode, setGameMode] = useState('local')
+  const path = router.pathname
+  const _gameMode = path.substring(1, 5) === 'game' ? 'server' : 'local'
+  const [gameMode, setGameMode] = useState(_gameMode)
+  const gameDiff =
+    _gameMode === 'server' ? path.substring(6) : path.substring(11)
 
   return (
     <>
@@ -114,12 +118,12 @@ const ResponsiveAppBar = ({ children }: Props) => {
               <Typography>GameMode:</Typography>
               <Typography>local</Typography>
               <AntSwitch
+                defaultChecked={gameMode === 'server' ? true : false}
                 inputProps={{ 'aria-label': 'ant design' }}
                 onChange={(e) => {
                   e.target.checked
-                    ? setGameMode('server')
-                    : setGameMode('local')
-                  console.log(gameMode)
+                    ? router.push(`/game/${gameDiff}`)
+                    : router.push(`/localGame/${gameDiff}`)
                 }}
               />
               <Typography>server</Typography>
