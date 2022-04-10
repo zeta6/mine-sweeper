@@ -39,6 +39,7 @@ const TempGame: NextPage = () => {
           lineTotal={squreRow}
           squarePerRow={squreLine}
           mineTotal={0}
+          gameMode="local"
         ></SqureLine>
       </Box>
       <Link href="/">
