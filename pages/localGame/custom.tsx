@@ -1,8 +1,6 @@
 import type { NextPage } from 'next'
 import GameContainer from 'common/components/GameContainer'
 
-import { easy as gameConfig } from 'common/config/standardGame'
-import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { Box, TextField, Button } from '@mui/material'
 
@@ -94,7 +92,6 @@ const Custom: NextPage = () => {
             ) {
               alert('Invalid value entered')
             } else {
-              console.log('gameConfig', gameConfig)
               setReady(true)
             }
           }}
