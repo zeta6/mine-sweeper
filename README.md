@@ -4,6 +4,10 @@
 
 NEXT.js로 제작되었습니다.
 
+# https://mine.alchemystars.link/
+
+위 주소에 배포되어 있습니다.
+
 빌드와 실행은 node.js, npm 으로 가능합니다.
 
 npm을 통한 노드모듈 설정이 필요합니다.  
