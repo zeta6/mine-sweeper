@@ -31,4 +31,4 @@ Amplify.configure({ ...awsExports })
 
 - npm run-script dev
 
-# runs on localhost:3000.
+# runs on localhost:3000
