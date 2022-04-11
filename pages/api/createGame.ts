@@ -3,7 +3,6 @@ import { getMines } from 'common/utils/game/getMines'
 
 import { createGame } from 'src/graphql/mutations'
 import { checkMineAround } from 'common/utils/game/checkMineAround'
-import { getCheckList } from 'common/utils/game/getCheckList'
 import { GraphQLResult } from '@aws-amplify/api'
 import { Amplify, API } from 'aws-amplify'
 import awsExports from 'src/aws-exports'

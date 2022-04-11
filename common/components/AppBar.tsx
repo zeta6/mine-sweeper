@@ -1,4 +1,4 @@
-import { BaseSyntheticEvent, useEffect, useState } from 'react'
+import { BaseSyntheticEvent, useState } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -171,7 +171,6 @@ const ResponsiveAppBar = ({ children }: Props) => {
                     key={index}
                   >
                     <MenuItem key={index}>
-                      {/* //  onClick={handleCloseNavMenu}> */}
                       <Typography textAlign="center">{page.str}</Typography>
                     </MenuItem>
                   </Link>
@@ -196,10 +195,7 @@ const ResponsiveAppBar = ({ children }: Props) => {
                   }
                   key={index}
                 >
-                  <Button
-                    // onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
-                  >
+                  <Button sx={{ my: 2, color: 'white', display: 'block' }}>
                     {page.str}
                   </Button>
                 </Link>

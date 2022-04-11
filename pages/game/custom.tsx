@@ -1,8 +1,5 @@
 import type { NextPage } from 'next'
 import GameContainer from 'common/components/GameContainer'
-
-import { easy as gameConfig } from 'common/config/standardGame'
-import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { Box, TextField, Button } from '@mui/material'
 

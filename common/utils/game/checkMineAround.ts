@@ -1,7 +1,3 @@
-// const _total = 81
-// const perRow = 9
-// const totalLine = 9
-
 import { getCheckList } from './getCheckList'
 
 export const checkMine = (point: number, mines: number[]) => {

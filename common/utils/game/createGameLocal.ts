@@ -1,5 +1,3 @@
-import axios from 'axios'
-import { gameIdState } from 'common/atoms/gameId'
 import { LocalGame } from 'common/types/LocalGame'
 
 import { getMines } from 'common/utils/game/getMines'

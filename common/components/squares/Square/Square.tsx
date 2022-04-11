@@ -3,12 +3,6 @@ import { useState } from 'react'
 import OpenedSquare from './OpenedSqaure'
 import ClosedSquare from './ClosedSquare'
 
-// const doAttempt = (leftClickCountState: number) => {
-//   if (leftClickCountState === 0) {
-//     createGame()
-//   }
-// }
-
 interface SquareProps {
   squareIndex: number
   lineTotal: number
