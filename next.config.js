@@ -41,16 +41,16 @@ const nextConfig = {
       },
     ]
   },
-  // webpack(config) {
-  //   config.output.crossOriginLoading = 'anonymous'
-  //   config.plugins.push(
-  //     new SubresourceIntegrityPlugin({
-  //       hashFuncNames: ['sha256', 'sha384'],
-  //       enabled: true,
-  //     })
-  //   )
-  //   return config
-  // },
+  webpack(config) {
+    config.output.crossOriginLoading = 'anonymous'
+    config.plugins.push(
+      new SubresourceIntegrityPlugin({
+        hashFuncNames: ['sha256', 'sha384'],
+        enabled: true,
+      })
+    )
+    return config
+  },
 }
 
 module.exports = nextConfig
