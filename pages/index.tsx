@@ -2,7 +2,6 @@ import type { NextPage } from 'next'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
-import Copyright from '../common/components/copy-right/Copyright'
 
 const Home: NextPage = () => {
   return (
@@ -17,9 +16,8 @@ const Home: NextPage = () => {
         }}
       >
         <Typography variant="h4" component="h1" gutterBottom>
-          mine-sweeper
+          Reproduce minesweeper with next.js
         </Typography>
-        <Copyright />
       </Box>
     </Container>
   )
