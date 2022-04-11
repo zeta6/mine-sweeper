@@ -1,19 +1,7 @@
 import { Box } from '@mui/material'
 import SqureLine from './squares/SqureLine'
-
-interface GameBoxProps {
-  squareRow: number
-  squareLine: number
-  mineTotal: number
-  gameMode: string
-}
-
-const GameBox = ({
-  squareRow,
-  squareLine,
-  mineTotal,
-  gameMode,
-}: GameBoxProps) => {
+import { GameProps } from 'common/types/GameProps'
+const GameBox = ({ squareRow, squareLine, mineTotal, gameMode }: GameProps) => {
   return (
     <Box
       sx={{

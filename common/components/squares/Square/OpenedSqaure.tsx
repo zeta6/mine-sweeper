@@ -3,7 +3,7 @@ import { gameIdState } from 'common/atoms/gameId'
 import { openedSquaresState } from 'common/atoms/openedSquares'
 import { flagedSquaresState } from 'common/atoms/flagedSquares'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { createGame } from 'common/utils/game/createGame'
 import { createGameLocal } from 'common/utils/game/createGameLocal'
 import { trySweep } from 'common/utils/game/trySweep'
@@ -13,6 +13,21 @@ import { getCheckList } from 'common/utils/game/getCheckList'
 import { getFlagAround } from 'common/utils/game/getFlagAround'
 import { userAliveState } from 'common/atoms/userAlive'
 import { localGameState } from 'common/atoms/localGame'
+import OpenedSquareInside from './OpenedSquareInside'
+import { styled } from '@mui/material/styles'
+
+const OpenedSqaure = styled('div', {
+  shouldForwardProp: (prop) => prop !== 'color',
+})(() => ({
+  width: '28px',
+  height: '28px',
+  backgroundColor: '#dddddd',
+  border: 'black solid 2px',
+  display: 'table-cell',
+  cursor: 'pointer',
+  textAlign: 'center',
+  padding: 0,
+}))
 
 interface OpenedSqaureProps {
   squareIndex: number
@@ -20,6 +35,8 @@ interface OpenedSqaureProps {
   squarePerRow: number
   mineTotal: number
   gameMode: string
+  setOpened: Dispatch<SetStateAction<boolean>>
+  mineAroud: string | number
 }
 
 const OpenedSquare = ({
@@ -28,6 +45,7 @@ const OpenedSquare = ({
   lineTotal,
   mineTotal,
   gameMode,
+  setOpened,
 }: OpenedSqaureProps) => {
   const [clickCount, setClickCount] = useRecoilState(clickCountState)
   const [openedSquares, setOpenedSquares] = useRecoilState(openedSquaresState)
@@ -97,18 +115,18 @@ const OpenedSquare = ({
   useEffect(() => {
     mineAround === -1 && setUserAlive(false)
   }, [mineAround])
+
+  useEffect(() => {
+    if (!openedSquares.includes(squareIndex)) {
+      setOpened(false)
+    }
+  }, [openedSquares])
   return (
-    <div
-      style={{
-        width: '28px',
-        height: '28px',
-        backgroundColor: 'red',
-        border: 'black solid 2px',
-        display: 'table-cell',
-      }}
+    <OpenedSqaure
+      sx={{ background: mineAround === -1 ? 'red' : '#dddddd' }}
       onContextMenu={(e) => e.preventDefault()}
       onMouseDown={(e) => {
-        if (checkBtn(e.button)) {
+        if (checkBtn(e.button) && userAlive) {
           if (mineAround === aroundFlag) {
             const setArr = new Set(
               openedSquares
@@ -120,8 +138,10 @@ const OpenedSquare = ({
         }
       }}
     >
-      {isLoading ? '' : mineAround === -1 ? 'M' : mineAround}
-    </div>
+      <OpenedSquareInside
+        mineAround={isLoading ? '' : mineAround === -1 ? 'M' : mineAround}
+      ></OpenedSquareInside>
+    </OpenedSqaure>
   )
 }
 

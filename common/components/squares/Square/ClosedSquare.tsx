@@ -5,6 +5,18 @@ import { flagedSquaresState } from 'common/atoms/flagedSquares'
 import { userAliveState } from 'common/atoms/userAlive'
 import { SetterOrUpdater, useRecoilState } from 'recoil'
 import { clickCountState } from 'common/atoms/clickCount'
+import { styled } from '@mui/material/styles'
+import { FlagIcon } from 'common/components/icons/FlagIcon'
+
+const ColosedSqaure = styled('div')({
+  width: '28px',
+  height: '28px',
+  backgroundColor: '#aaaaaa',
+  border: 'black solid 2px',
+  display: 'table-cell',
+  cursor: 'pointer',
+})
+
 interface ClosedSquarePorps {
   squareIndex: number
   setOpened: (opened: boolean) => void
@@ -44,41 +56,40 @@ const ClosedSquare = ({ squareIndex, setOpened }: ClosedSquarePorps) => {
     }
   }, [openedSquares])
   return (
-    <div
-      style={{
-        width: '28px',
-        height: '28px',
-        backgroundColor: 'white',
-        border: 'black solid 2px',
-        display: 'table-cell',
-        cursor: 'pointer',
-      }}
+    <ColosedSqaure
       onClick={() => {
-        clickCount === 0 && setUserAlive(true)
-        setOpened(true)
-        setOpenedSquares([...openedSquares, squareIndex])
+        if (clickCount === 0) {
+          setUserAlive(true)
+          setOpened(true)
+          setOpenedSquares([...openedSquares, squareIndex])
+        } else if (userAlive) {
+          setOpened(true)
+          setOpenedSquares([...openedSquares, squareIndex])
+        }
       }}
       onMouseDown={(e) => {
-        if (checkBtn(e.button)) {
-          isFlag
-            ? hendleUnsetFlag(
-                squareIndex,
-                flagedSquares,
-                setFlagedSquares,
-                setFlag
-              )
-            : handleSetFlag(
-                squareIndex,
-                flagedSquares,
-                setFlagedSquares,
-                setFlag
-              )
+        if (userAlive) {
+          if (checkBtn(e.button)) {
+            isFlag
+              ? hendleUnsetFlag(
+                  squareIndex,
+                  flagedSquares,
+                  setFlagedSquares,
+                  setFlag
+                )
+              : handleSetFlag(
+                  squareIndex,
+                  flagedSquares,
+                  setFlagedSquares,
+                  setFlag
+                )
+          }
         }
       }}
       onContextMenu={(e) => e.preventDefault()}
     >
-      {isFlag ? 'F' : ''}
-    </div>
+      {isFlag ? <FlagIcon></FlagIcon> : ''}
+    </ColosedSqaure>
   )
 }
 
