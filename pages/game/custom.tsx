@@ -1,52 +1,93 @@
-import * as React from 'react'
 import type { NextPage } from 'next'
-import Container from '@mui/material/Container'
-import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
-import Link from 'common/components/link/Link'
-// import Copyright from '../common/components/copy-right/Copyright'
-import { Button } from '@mui/material'
-import SqureLine from 'common/components/squares/SqureLine'
+import GameContainer from 'common/components/GameContainer'
 
-const squreRow = 10
-const squreLine = 10
-// const SmallSquareTotal: number = 10
+import { easy as gameConfig } from 'common/config/standardGame'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { Box, TextField, Button } from '@mui/material'
 
-const TempGame: NextPage = () => {
-  return (
-    <Container maxWidth="lg">
+const Custom: NextPage = () => {
+  const [gameConfig, setGameConfig] = useState({
+    squareRow: NaN,
+    squareLine: NaN,
+    mineTotal: NaN,
+  })
+  const [ready, setReady] = useState(false)
+  return ready ? (
+    <GameContainer
+      gameMode="local"
+      squareRow={gameConfig.squareRow}
+      squareLine={gameConfig.squareLine}
+      mineTotal={gameConfig.mineTotal}
+    ></GameContainer>
+  ) : (
+    <>
       <Box
+        component="form"
         sx={{
-          my: 4,
+          '& > :not(style)': { m: 1, mt: 10, width: '25ch' },
           display: 'flex',
-          flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: 'center',
         }}
+        noValidate
+        autoComplete="off"
       >
-        <Typography variant="h4" component="h1" gutterBottom></Typography>
+        <TextField
+          label="square per row"
+          color="secondary"
+          type="number"
+          value={gameConfig.squareRow}
+          onChange={(e) =>
+            setGameConfig({
+              ...gameConfig,
+              squareRow: parseInt(e.target.value),
+            })
+          }
+          focused
+        />
+        <TextField
+          label="line length"
+          color="secondary"
+          type="number"
+          value={gameConfig.squareLine}
+          onChange={(e) =>
+            setGameConfig({
+              ...gameConfig,
+              squareLine: parseInt(e.target.value),
+            })
+          }
+          focused
+        />
+        <TextField
+          label="mine total"
+          color="secondary"
+          type="number"
+          value={gameConfig.mineTotal}
+          onChange={(e) =>
+            setGameConfig({
+              ...gameConfig,
+              mineTotal: parseInt(e.target.value),
+            })
+          }
+          focused
+        />
       </Box>
       <Box
+        component="form"
         sx={{
-          my: 4,
+          '& > :not(style)': { m: 1, mt: 10, width: '25ch' },
           display: 'flex',
-          flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: 'center',
         }}
+        noValidate
+        autoComplete="off"
       >
-        <SqureLine
-          lineTotal={squreRow}
-          squarePerRow={squreLine}
-          mineTotal={0}
-          gameMode="server"
-        ></SqureLine>
+        <Button variant="outlined" onClick={() => setReady(true)}>
+          Make Custom Game
+        </Button>
       </Box>
-      <Link href="/">
-        <Button>go to home</Button>
-      </Link>
-    </Container>
+    </>
   )
 }
 
-export default TempGame
+export default Custom

@@ -5,16 +5,21 @@ import { openedSquaresLenState } from 'common/atoms/openedSquares'
 import { userAliveState } from 'common/atoms/userAlive'
 import { useEffect, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import GameBox, { games } from './GameBox'
-import Link from './link/Link'
-
+import GameBox from './GameBox'
 interface GameContainerProps {
-  diff: string
+  squareRow: number
+  squareLine: number
+  mineTotal: number
   gameMode: string
 }
 
-const GameContainer = ({ diff, gameMode }: GameContainerProps) => {
-  const squaresTotal = games[diff].squareRow * games[diff].squareLine
+const GameContainer = ({
+  squareRow,
+  squareLine,
+  mineTotal,
+  gameMode,
+}: GameContainerProps) => {
+  const squaresTotal = squareRow * squareLine
   const flagCount = useRecoilValue(flagedSquresLenState)
   const opendCount = useRecoilValue(openedSquaresLenState)
   const clickCount = useRecoilValue(clickCountState)
@@ -23,7 +28,7 @@ const GameContainer = ({ diff, gameMode }: GameContainerProps) => {
   const [time, setTime] = useState(0)
   const [notOpened, setNotOpened] = useState(squaresTotal)
   const [complete, setComplete] = useState(false)
-  const mineTotal = games[diff].mineTotal
+
   useEffect(() => {
     setLoading(false)
     return () => {
@@ -45,7 +50,7 @@ const GameContainer = ({ diff, gameMode }: GameContainerProps) => {
     squaresTotal - opendCount <= mineTotal && setComplete(true)
   }, [opendCount])
   return isLoading ? (
-    <Container maxWidth="lg">loading</Container>
+    <Container maxWidth="lg"></Container>
   ) : (
     <Container maxWidth="lg">
       <Box
@@ -71,8 +76,12 @@ const GameContainer = ({ diff, gameMode }: GameContainerProps) => {
           complete: {complete ? 'Great. Done.' : 'Not yet'}
         </Typography>
       </Box>
-      <GameBox diff={diff} gameMode={gameMode}></GameBox>
-      {/* <Link href="/"> */}
+      <GameBox
+        squareRow={squareRow}
+        squareLine={squareLine}
+        gameMode={gameMode}
+        mineTotal={mineTotal}
+      ></GameBox>
       <div style={{ display: 'flex' }}>
         <Button
           variant="outlined"
@@ -82,7 +91,6 @@ const GameContainer = ({ diff, gameMode }: GameContainerProps) => {
           New Game
         </Button>
       </div>
-      {/* </Link> */}
     </Container>
   )
 }
