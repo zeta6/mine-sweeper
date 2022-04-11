@@ -1,12 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getMines } from 'common/utils/game/getMines'
 
-import { Amplify, API } from 'aws-amplify'
-import awsExports from 'src/aws-exports'
 import { createGame } from 'src/graphql/mutations'
 import { checkMineAround } from 'common/utils/game/checkMineAround'
 import { getCheckList } from 'common/utils/game/getCheckList'
 import { GraphQLResult } from '@aws-amplify/api'
+import { Amplify, API } from 'aws-amplify'
+import awsExports from 'src/aws-exports'
 Amplify.configure({ ...awsExports })
 
 export default async function handle(
