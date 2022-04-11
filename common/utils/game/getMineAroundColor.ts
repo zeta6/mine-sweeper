@@ -15,5 +15,7 @@ export const getMineAroudColor = (mineAround: number | string) => {
     ? '#d00303'
     : mineAround === 6
     ? '#5c0101'
+    : mineAround === '?'
+    ? '#000000'
     : '#DDDDDD'
 }

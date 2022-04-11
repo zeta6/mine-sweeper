@@ -139,7 +139,7 @@ const OpenedSquare = ({
       }}
     >
       <OpenedSquareInside
-        mineAround={isLoading ? '' : mineAround === -1 ? 'M' : mineAround}
+        mineAround={isLoading ? '?' : mineAround === -1 ? 'M' : mineAround}
       ></OpenedSquareInside>
     </OpenedSqaure>
   )
