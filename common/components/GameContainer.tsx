@@ -156,7 +156,8 @@ const GameContainer = ({
         }}
       >
         우클릭으로 주변 오픈과 깃발 설정이 가능합니다. <br></br>
-        server 모드에서는 브라우저로 mine 좌표가 전달되지 않습니다.
+        server 모드에서는 브라우저로 mine 좌표가 전달되지 않습니다. <br></br>첫
+        번째 클릭은 안전합니다.
       </Typography>
     </Container>
   )
