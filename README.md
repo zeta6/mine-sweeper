@@ -1,6 +1,8 @@
 ## mine sweeper
 
-## https://mine.alchemystars.link/
+## Demo
+
+https://mine.alchemystars.link/
 
 지뢰찾기 게임입니다.
 
