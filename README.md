@@ -1,12 +1,10 @@
 ## mine sweeper
 
+## https://mine.alchemystars.link/
+
 지뢰찾기 게임입니다.
 
 NEXT.js로 제작되었습니다.
-
-# https://mine.alchemystars.link/
-
-위 주소에 배포되어 있습니다.
 
 빌드와 실행은 node.js, npm 으로 가능합니다.
 
