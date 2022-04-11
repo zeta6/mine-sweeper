@@ -121,9 +121,13 @@ const ResponsiveAppBar = ({ children }: Props) => {
                 defaultChecked={gameMode === 'server' ? true : false}
                 inputProps={{ 'aria-label': 'ant design' }}
                 onChange={(e) => {
-                  e.target.checked
-                    ? router.push(`/game/${gameDiff}`)
-                    : router.push(`/localGame/${gameDiff}`)
+                  if (e.target.checked) {
+                    setGameMode('server')
+                    router.push(`/game/${gameDiff}`)
+                  } else {
+                    setGameMode('local')
+                    router.push(`/localGame/${gameDiff}`)
+                  }
                 }}
               />
               <Typography>server</Typography>
