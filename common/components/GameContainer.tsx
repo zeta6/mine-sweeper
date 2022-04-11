@@ -60,11 +60,15 @@ const GameContainer = ({
     return () => {
       setFlagedSquares(initialState.flagedSquares)
       setOpenedSquares(initialState.openedSquares)
-      setClickCount(initialState.clickCount)
       setUserAlive(initialState.userAlive)
+      setClickCount(initialState.clickCount)
       setGameId(initialState.gameId)
     }
   }, [])
+  useEffect(() => {
+    squaresTotal === notOpened && setClickCount(0)
+  }, [clickCount])
+
   useEffect(() => {
     const timer = setInterval(() => {
       setTime((time) => time + 1)
