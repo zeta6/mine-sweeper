@@ -4,6 +4,8 @@
 
 https://mine.alchemystars.link/
 
+## explanation
+
 지뢰찾기 게임입니다.
 
 NEXT.js로 제작되었습니다.
