@@ -1,7 +1,4 @@
-import axios from 'axios'
-import { clickCountState } from 'common/atoms/clickCount'
-import { createGame } from 'common/utils/game/createGame'
-import { Component, SetStateAction, useState } from 'react'
+import { useState } from 'react'
 
 import OpenedSquare from './OpenedSqaure'
 import ClosedSquare from './ClosedSquare'
@@ -35,6 +32,8 @@ const Square = ({
       squarePerRow={squarePerRow}
       mineTotal={mineTotal}
       gameMode={gameMode}
+      setOpened={setOpened}
+      mineAroud={''}
     ></OpenedSquare>
   ) : (
     <ClosedSquare
@@ -43,17 +42,5 @@ const Square = ({
     ></ClosedSquare>
   )
 }
-//     <div
-//       style={{
-//         width: '20px',
-//         height: '20px',
-//         backgroundColor: 'red',
-//         border: 'black solid 2px',
-//         display: 'table-cell',
-//       }}
-//       onClick={() => doAttempt(0)}
-//     ></div>
-//   )
-// }
 
 export default Square
